@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title></title>
+    <link rel="stylesheet" href="css/weUi.css">
+    <link rel="stylesheet" href="css/style.css?v=3">
+</head>
+<body>
+<div class="container" id="content"></div>
+
+<!--公用弹框-->
+<div class="weui_dialog_alert hide" id="dialog1">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+        <div class="weui_dialog_bd"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+<!--今天吃什么-->
+<script type="text/html" id="tpl_home">
+    <link rel="import" href="page/home.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_eat">
+    <link rel="import" href="page/eat.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_dataPlan">
+    <link rel="import" href="page/dataPlan.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_note">
+    <link rel="import" href="page/note.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_holiday">
+    <link rel="import" href="page/holiday.tpl?__inline">
+</script>
+
+<script type="text/html" id="tpl_mirror">
+    <link rel="import" href="page/mirror.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_chooser">
+    <link rel="import" href="page/choose.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_edit">
+    <link rel="import" href="page/edit.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_editPlan">
+    <link rel="import" href="page/editPlan.tpl?__inline">
+</script>
+<script type="text/html" id="tpl_editPlanItem">
+    <link rel="import" href="page/editPlanItem.tpl?__inline">
+</script>
+<script src="build/jquery.min.js"></script>
+<script src="api/index.js"></script>
+<script src="js/myMain.js"></script>
+<script>
+    ;
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var size = 20;
+                var clientWidth = Math.min(Math.max(320, docEl.clientWidth), 640);
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+</body>
+</html>

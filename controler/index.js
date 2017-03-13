@@ -8,7 +8,7 @@ const path = require('path')
 const fs = require('fs')
 const db = {}
 
-var sequelize = new Sequelize('test', 'root', 'root', {
+var sequelize = new Sequelize('test', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
 })

@@ -1,12 +1,11 @@
 
 const db = require('./index')
+const common = require('../until')
 // 中间数据转换器
 const getData = function () {
   return new Promise(function (resolve) {
     db.plan.findAll().then((ret) => {
-      resolve(ret.map(function (e) {
-        return e.get({plain: true})
-      }))
+      resolve(common.filter(ret))
     })
   })
 }

@@ -1,17 +1,8 @@
-/**
- * Created by duoyi on 2017/3/8.
- */
-// var Sequelize = require('sequelize')
-
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('role', {
+  return sequelize.define('user', {
     id: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
-    },
-    birth: {
-      type: DataTypes.STRING(255),
       allowNull: false
     },
     name: {
@@ -19,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    tableName: 'role',
+    tableName: 'user',
     freezeTableName: true,
     timestamps: false
   })

@@ -2,17 +2,14 @@
  * Created by duoyi on 2017/3/8.
  */
 const plan = require('../../controler/plan')
+const APIError = require('../../middleware/rest').APIError
 
 const get = async(ctx, next) => {
   let result
   await plan.getData().then((ret) => {
     result = ret
   })
-  ctx.response.type = 'application/json'
-  ctx.response.body = {
-    code: 0,
-    data: result
-  }
+  ctx.rest(result)
 }
 
 const set = async(ctx, next) => {
@@ -22,12 +19,17 @@ const set = async(ctx, next) => {
     note: ctx.request.body.note
   }
   let result = ''
-  console.log(params.id, params.content)
-  await plan.setData(params).then(() => {
-    result = '更新成功'
-  })
-  ctx.response.type = 'application/json'
-  ctx.response.body = {data: result}
+  if ((!params.content) || (!params.note)) {
+    throw new APIError('params:params_not_found', '请传入参数')
+  } else {
+    await plan.setData(params).then(() => {
+      result = '更新成功'
+    })
+    ctx.rest({
+      code: 0,
+      data: result
+    })
+  }
 }
 
 const del = async(ctx, next) => {
@@ -38,10 +40,9 @@ const del = async(ctx, next) => {
       result = '删除成功'
     })
   } else {
-    result = '请传入参数'
+    throw new APIError('params:params_not_found', '请传入参数')
   }
-  ctx.response.type = 'application/json'
-  ctx.response.body = {data: result}
+  ctx.rest(result)
 }
 module.exports = {
   get,
